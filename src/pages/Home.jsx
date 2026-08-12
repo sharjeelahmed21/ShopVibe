@@ -30,7 +30,16 @@ const Home = () => {
         setLoading(false);
       } catch (err) {
         console.warn('API Failed, using mock data for demo purposes:', err.message);
-        setProducts(mockProducts);
+        if (keyword) {
+          const filtered = mockProducts.filter(p => 
+            p.name.toLowerCase().includes(keyword.toLowerCase())
+          );
+          setProducts(filtered);
+        } else {
+          setProducts(mockProducts);
+        }
+        setPages(1);
+        setPage(1);
         setLoading(false);
       }
     };
